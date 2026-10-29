@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f6f2" />
+    <title>Chess Review – Partieanalyse</title>
+    <link rel="stylesheet" href="analysis.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="analysis.html" aria-label="Chess Review Startseite">
+        <span class="brand-icon" aria-hidden="true">♞</span>
+        <span>Chess Review</span>
+      </a>
+      <span class="local-badge"><span></span> Lokale Analyse</span>
+    </header>
+
+    <main class="page-shell">
+      <section id="import-panel" class="import-panel panel">
+        <div class="eyebrow">PARTIE NACHBEREITEN</div>
+        <h1>Finde heraus, was du übersehen hast.</h1>
+        <p class="intro">Füge die PGN einer <strong>abgeschlossenen</strong> Partie ein. Stockfish analysiert jeden Zug und zeigt seinen Top-Vorschlag direkt auf dem Brett.</p>
+
+        <label for="pgn-input">PGN</label>
+        <textarea id="pgn-input" spellcheck="false" placeholder='[Event "Live Chess"]&#10;[White "Spieler"]&#10;[Black "Gegner"]&#10;&#10;1. e4 e5 2. Nf3 Nc6 ...'></textarea>
+        <div class="import-actions">
+          <label class="file-button" for="pgn-file">PGN-Datei laden</label>
+          <input id="pgn-file" type="file" accept=".pgn,text/plain" />
+          <button id="load-game" class="primary" type="button">Partie laden <span aria-hidden="true">→</span></button>
+        </div>
+        <p id="import-error" class="error" role="alert" hidden></p>
+        <p class="privacy-note"><span aria-hidden="true">●</span> PGN und Analyse bleiben auf deinem Gerät. Die Erweiterung liest keine Chess.com-Seiten aus.</p>
+      </section>
+
+      <section id="workspace" class="workspace" hidden>
+        <div class="game-heading">
+          <div>
+            <div class="eyebrow">PARTIEÜBERSICHT</div>
+            <h1 id="game-title">Partieanalyse</h1>
+            <p id="game-subtitle" class="muted"></p>
+          </div>
+          <button id="change-game" class="secondary" type="button">Andere PGN laden</button>
+        </div>
+
+        <div class="analysis-layout">
+          <section class="board-column panel">
+            <div class="board-heading">
+              <div>
+                <div class="eyebrow">STELLUNG VOR DEM ZUG</div>
+                <h2 id="position-title">Zug 1 · Weiß</h2>
+              </div>
+              <span id="turn-pill" class="turn-pill">Weiß am Zug</span>
+            </div>
+            <div id="chessboard" class="chessboard" role="img" aria-label="Schachbrett vor dem ausgewählten Zug"></div>
+            <div id="move-summary" class="move-summary"></div>
+            <div class="board-controls">
+              <button id="previous-move" class="icon-button" type="button" aria-label="Vorheriger Zug">←</button>
+              <span id="move-counter">Zug 1 von 1</span>
+              <button id="next-move" class="icon-button" type="button" aria-label="Nächster Zug">→</button>
+            </div>
+          </section>
+
+          <section class="review-column">
+            <div class="panel engine-panel">
+              <div class="engine-title-row">
+                <div>
+                  <div class="eyebrow">ENGINE-ANALYSE</div>
+                  <h2>Stockfish 19</h2>
+                </div>
+                <span class="engine-chip">Lite · lokal</span>
+              </div>
+              <p class="muted engine-copy">Analysiert die Stellung vor dem ausgewählten Zug. Der grüne Pfeil zeigt den Engine-Topzug.</p>
+              <div class="engine-actions">
+                <label class="depth-control" for="depth-select">Tiefe
+                  <select id="depth-select">
+                    <option value="10">10</option>
+                    <option value="12" selected>12</option>
+                    <option value="14">14</option>
+                  </select>
+                </label>
+                <button id="analyze-current" class="secondary" type="button">Diesen Zug analysieren</button>
+              </div>
+              <button id="analyze-all" class="primary full-button" type="button">Alle Züge analysieren</button>
+              <button id="stop-analysis" class="stop-button" type="button" hidden>Analyse anhalten</button>
+              <div id="analysis-status" class="status-line" role="status" aria-live="polite">Bereit. Wähle einen Zug oder analysiere die ganze Partie.</div>
+              <div id="engine-result" class="engine-result" hidden></div>
+            </div>
+
+            <div class="panel moves-panel">
+              <div class="moves-header">
+                <div>
+                  <div class="eyebrow">ZUGFOLGE</div>
+                  <h2>Partieverlauf</h2>
+                </div>
+                <span id="analyzed-count" class="count-pill">0 analysiert</span>
+              </div>
+              <div id="move-list" class="move-list" aria-label="Züge der Partie"></div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="analysis.js"></script>
+  </body>
+</html>

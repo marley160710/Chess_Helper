@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Chess Review – Partieanalyse",
+  "version": "1.0.0",
+  "description": "Analysiert PGNs abgeschlossener Schachpartien lokal mit Stockfish.",
+  "action": {
+    "default_title": "Chess Review öffnen",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; worker-src 'self'"
+  }
+}
